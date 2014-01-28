@@ -1,3 +1,4 @@
+%train = load('data/train_small.mat');
 training_set = train{1};
 
 labels = [];
@@ -22,6 +23,6 @@ for i = 1: length(training_set)
     end
 end
 
-lab = double(labels)';
+lab = double(labels)';	
 img = sparse(double(trainingfeat));
-model=train(lab, img, '-s 0')
+model=train(lab, img, '-s 2')

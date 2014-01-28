@@ -1,5 +1,5 @@
 %train = load('data/train_small.mat');
-training_set = train{1};
+training_set = training_mat{1};
 
 labels = [];
 trainingfeat = [];

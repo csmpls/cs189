@@ -1,5 +1,5 @@
 %train = load('data/train_small.mat');
-training_set = training_mat{1};
+training_set = training_mat{7};
 
 labels = [];
 trainingfeat = [];
@@ -25,4 +25,19 @@ end
 
 lab = double(labels)';	
 img = sparse(double(trainingfeat));
-model=train(lab, img, '-s 2')
+model=train(lab, img, '-s 2');
+
+%test = load('data/test.mat');
+testing_set = test(1);
+
+% use our model to make predictions about our training set
+test_labels = testing_set.labels;
+test_features = [];
+for i = 1: length(testing_set.images)
+    pixels = testing_set.images(:,:,i);
+    row = reshape(pixels,1,[]);
+    test_features = [test_features; row];
+end
+test_features = sparse(double(test_features));
+
+prediction = predict(test_labels, test_features, model);

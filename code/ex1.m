@@ -1,13 +1,14 @@
-%train = load('data/train_small.mat');
-training_set = training_mat{7};
 
-labels = [];
-trainingfeat = [];
+%all_training_sets = load('train_small.mat');
+training_set = train_small{1};
+
+training_labels = [];
+training_features = [];
 
 for i = 1: length(training_set)  
     
     % get all labels in our development training set
-    labels = [labels, (training_set(i).labels)'];
+    training_labels = [training_labels, (training_set(i).labels)'];
     
     %get all the training features in our dataset
     for j = 1: length(training_set(i).images)
@@ -18,13 +19,13 @@ for i = 1: length(training_set)
         % we will turn it into a row vector with
         % all the pixel values concatinated 
         row = reshape(pixels,1,[]);
-        trainingfeat = [trainingfeat; row];
+        training_features = [training_features; row];
         
     end
 end
 
-lab = double(labels)';	
-img = sparse(double(trainingfeat));
+lab = double(training_labels)';	
+img = sparse(double(training_features));
 model=train(lab, img, '-s 2');
 
 %test = load('data/test.mat');
